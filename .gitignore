@@ -3,3 +3,12 @@
 ################################################################################
 
 /TAINATechTest/.vs/TAINATechTest
+/TAINATechTest/bin/Debug/netcoreapp3.1
+/TAINATechTest/obj
+/TAINATechTest/wwwroot/lib
+/TAINATechTest.Data/bin/Debug/netcoreapp3.1
+/TAINATechTest.Data/obj
+/TAINATechTest.Services/bin/Debug/netcoreapp3.1
+/TAINATechTest.Services/obj
+/TAINATechTest.UnitTests/bin/Debug/netcoreapp3.1
+/TAINATechTest.UnitTests/obj
