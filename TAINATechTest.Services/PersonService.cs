@@ -24,9 +24,14 @@ namespace TAINATechTest.Services
             return _personRepository.GetById(id);
         }
 
-        public int? AddPerson(Person person)
+        public long AddOrUpdate(Person person)
         {
-            return _personRepository.AddPerson(person);
+            return _personRepository.AddOrUpdate(person);
+        }
+
+        public bool Delete(long id)
+        {
+            return _personRepository.Delete(id);
         }
     }
 }

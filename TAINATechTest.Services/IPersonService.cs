@@ -8,6 +8,8 @@ namespace TAINATechTest.Services
         List<Person> GetAllPeople();
         Person GetPersonById(long id);
 
-        public int? AddPerson(Person person);
+        public long AddOrUpdate(Person person);
+
+        public bool Delete(long id);
     }
 }

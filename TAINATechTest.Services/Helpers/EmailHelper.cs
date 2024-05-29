@@ -6,7 +6,8 @@ namespace TAINATechTest.Services.Helpers
     {
         public static bool IsEmailValid(string emailAddress)
         {
-            Match match = Regex.Match(emailAddress, "/^\\S+@\\S+\\.\\S+$/");
+            //Match match = Regex.Match(emailAddress, "/^\\S+@\\S+\\.\\S+$/");
+            var match = Regex.Match(emailAddress, "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
             return match.Success;
         }
     }

@@ -59,11 +59,42 @@
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <form id="deleteForm-@item.Id" action="@Url.Action("Delete", "person", new { id = item.Id })" method="post" onsubmit="event.preventDefault(); deleteItem(@item.Id);">
+                                <button type="submit">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 }
             </tbody>
     </table>
+    @Html.AntiForgeryToken()
     }
 </div>
+
+
+@section Scripts {
+    <script>
+        function deleteItem(id) {
+            if (confirm('Are you sure you want to delete this item?')) {
+                var form = document.getElementById('deleteForm-' + id);
+                var data = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'DELETE',
+                    body: data,
+                    headers: {
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Failed to delete item.');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+    </script>
+}

@@ -9,6 +9,8 @@ namespace TAINATechTest.Data.Repositories
 
         public Person GetById(long id);
 
-        public int? AddPerson(Person person);
+        public long AddOrUpdate(Person person);
+
+        public bool Delete(long id);
     }
 }

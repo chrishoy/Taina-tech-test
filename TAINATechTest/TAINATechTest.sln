@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAINATechTest", "TAINATechTest.csproj", "{CC384E06-2B9A-48A4-BC11-CBB8F19A5078}"
 EndProject
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAINATechTest.Services", ".
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAINATechTest.Data", "..\TAINATechTest.Data\TAINATechTest.Data.csproj", "{4ADD8A4A-A1D6-4AAE-BE67-F12FE4DC7F07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAINATechTest.UnitTests", "..\TAINATechTest.UnitTests\TAINATechTest.UnitTests.csproj", "{4FDB5146-5E37-4DB8-8DE5-CBB190D57019}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TAINATechTest.UnitTests", "..\TAINATechTest.UnitTests\TAINATechTest.UnitTests.csproj", "{4FDB5146-5E37-4DB8-8DE5-CBB190D57019}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -32,10 +32,14 @@ namespace TAINATechTest.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             Person person = _personService.GetPersonById(id.Value);
+            if (person is null)
+            {
+                return NotFound();
+            }
 
             return View(person);
         }
@@ -45,9 +49,25 @@ namespace TAINATechTest.Controllers
             return View();
         }
 
-        public IActionResult Edit()
+        //public IActionResult Edit()
+        //{
+        //    return View();
+        //}
+
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(long id)
         {
-            return View();
+            try
+            {
+                _personService.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Failed to delete person with id {id}", ex);
+                ModelState.AddModelError("", "Unable to delete. " + ex.Message);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -64,8 +84,8 @@ namespace TAINATechTest.Controllers
                     }
                     else
                     {
-                        int? newId = _personService.AddPerson(person);
-                        if (newId == null)
+                        var newId = _personService.AddOrUpdate(person);
+                        if (newId == 0)
                         {
                             ModelState.AddModelError("", "Unable to save changes. ");
                         }
@@ -84,27 +104,50 @@ namespace TAINATechTest.Controllers
             return View(person);
         }
 
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public IActionResult EditPost(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
+            Person person = _personService.GetPersonById(id.Value);
+
+            return View(person);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit([Bind("Id,FirstName,LastName,Gender,EmailAddress,PhoneNumber")] Person person)
+        {
             try
             {
                 if (ModelState.IsValid)
                 {
-                   
+                    if (!EmailHelper.IsEmailValid(person.EmailAddress))
+                    {
+                        ModelState.AddModelError("", "Unable to save changes - invalid email address format. ");
+                    }
+                    else
+                    {
+                        long newId = _personService.AddOrUpdate(person);
+                        if (newId == 0)
+                        {
+                            ModelState.AddModelError("", "Unable to save changes. ");
+                        }
+                        else
+                        {
+                            return RedirectToAction(nameof(Index));
+                        }
+                    }
                 }
             }
-            catch (Exception /* ex */)
+            catch (Exception ex)
             {
                 //Log the error (uncomment ex variable name and write a log.
-                ModelState.AddModelError("", "Unable to save changes. ");
+                ModelState.AddModelError("", "Unable to save changes. " + ex.Message);
             }
-            return View();
+            return View(person);
         }
 
         public IActionResult Privacy()
